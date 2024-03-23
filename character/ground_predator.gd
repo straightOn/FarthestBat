@@ -44,4 +44,4 @@ func _on_detection_body_exited(body):
 
 func _on_attack_body_entered(body):
 	if body is Bat:
-		body.catched()
+		body.caught()

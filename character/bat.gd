@@ -16,7 +16,7 @@ var stamina = 100
 var flap_cost = 2
 var flapping = false
 
-signal on_catched
+signal on_caught
 
 func _ready():
 	init()
@@ -64,8 +64,7 @@ func _on_eat_area_body_entered(body):
 		label_animation.play("score")
 		body.get_eaten()
 
-func catched():
+func caught():
 	# splatter-particle here
-	print("### catched called")
-	animation_player.play("catched")
-	on_catched.emit()
+	animation_player.play("caught")
+	on_caught.emit()
