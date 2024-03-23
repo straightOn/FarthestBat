@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://di8v7m6xuhd0d"]
+[gd_scene load_steps=10 format=3 uid="uid://di8v7m6xuhd0d"]
 
 [ext_resource type="Script" path="res://world/firefly.gd" id="1_waugq"]
 
@@ -15,6 +15,9 @@ gradient = SubResource("Gradient_0vj6a")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ktdxm"]
 lifetime_randomness = 0.1
 direction = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
 gravity = Vector3(0, 98, 0)
 scale_min = 0.0
 scale_max = 1.5
@@ -23,12 +26,114 @@ anim_speed_max = 1.0
 
 [sub_resource type="Animation" id="Animation_l2py0"]
 resource_name = "despawn"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Polygon2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.785398]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_8fyme"]
 resource_name = "spawn"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Polygon2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.785398, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_26f87"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Polygon2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kfiri"]
 _data = {
+"RESET": SubResource("Animation_26f87"),
 "despawn": SubResource("Animation_l2py0"),
 "spawn": SubResource("Animation_8fyme")
 }
@@ -47,8 +152,10 @@ polygon = PackedVector2Array(-5, 0, 0, -5, 5, 0, 0, 5)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 unique_name_in_owner = true
+emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_ktdxm")
+explosiveness = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
