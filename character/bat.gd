@@ -66,4 +66,6 @@ func _on_eat_area_body_entered(body):
 
 func catched():
 	# splatter-particle here
+	print("### catched called")
+	animation_player.play("catched")
 	on_catched.emit()

@@ -1,6 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://ckks5sxlrrs0p"]
+[gd_scene load_steps=14 format=3 uid="uid://ckks5sxlrrs0p"]
 
 [ext_resource type="Script" path="res://character/bat.gd" id="1_ci34c"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dkodp"]
+spread = 150.0
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 98, 0)
+scale_max = 5.0
+color = Color(1, 0.14902, 0.14902, 1)
+hue_variation_max = 0.05
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_28nlh"]
 height = 32.0
@@ -114,6 +123,33 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = false
+tracks/9/path = NodePath("GPUParticles2D:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_bkgt8"]
+resource_name = "catched"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_cm2cw"]
@@ -233,6 +269,7 @@ tracks/8/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0mvnw"]
 _data = {
 "RESET": SubResource("Animation_3nukd"),
+"catched": SubResource("Animation_bkgt8"),
 "flap": SubResource("Animation_cm2cw")
 }
 
@@ -306,6 +343,12 @@ _data = {
 
 [node name="Bat" type="CharacterBody2D"]
 script = ExtResource("1_ci34c")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_dkodp")
+explosiveness = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_28nlh")
