@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ckks5sxlrrs0p"]
+[gd_scene load_steps=18 format=3 uid="uid://ckks5sxlrrs0p"]
 
 [ext_resource type="Script" path="res://character/bat.gd" id="1_ci34c"]
 
@@ -10,6 +10,13 @@ gravity = Vector3(0, 98, 0)
 scale_max = 5.0
 color = Color(1, 0.14902, 0.14902, 1)
 hue_variation_max = 0.05
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v5ab3"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 98, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_28nlh"]
 height = 32.0
@@ -273,6 +280,43 @@ _data = {
 "flap": SubResource("Animation_cm2cw")
 }
 
+[sub_resource type="Animation" id="Animation_1t6yu"]
+resource_name = "fly"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fly_GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_kjftp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fly_GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_313sk"]
+_data = {
+"RESET": SubResource("Animation_kjftp"),
+"fly": SubResource("Animation_1t6yu")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_nuymb"]
 radius = 21.0
 
@@ -350,6 +394,12 @@ amount = 50
 process_material = SubResource("ParticleProcessMaterial_dkodp")
 explosiveness = 1.0
 
+[node name="fly_GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_v5ab3")
+explosiveness = 1.0
+trail_enabled = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_28nlh")
 
@@ -379,6 +429,12 @@ polygon = PackedVector2Array(-5, -12, 5, -12, 0, -10)
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_0mvnw")
+}
+
+[node name="BatFlyAnimation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_313sk")
 }
 
 [node name="EatArea" type="Area2D" parent="."]

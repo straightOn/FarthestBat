@@ -1,6 +1,7 @@
 class_name Bat extends CharacterBody2D
 
 @onready var animation_player: AnimationPlayer = %BatAnimation
+@onready var fly_animation: AnimationPlayer = %BatFlyAnimation
 @onready var score: Label = %Score
 @onready var label_animation: AnimationPlayer = %LabelAnimation
 @onready var stamina_bar: ProgressBar = %StaminaBar
@@ -45,6 +46,7 @@ func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		velocity.y = FLAP_VELOCITY
 		update_stamina(stamina - 2)
+		fly_animation.play("fly")
 		if !flapping:
 			flapping = true
 			animation_player.play("flap")

@@ -16,7 +16,7 @@ var score = 0
 
 var game_state: GAME_STATE = GAME_STATE.NEW
 
-func _on_player_on_catched():
+func _on_player_on_caught():
 	set_state(GAME_STATE.FINISHED)
 	score_timer.stop()
 	# show game over + highscore
