@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnpro8p7g58sd"]
+
+[ext_resource type="Script" path="res://character/ai_bat.gd" id="1_df58w"]
+[ext_resource type="PackedScene" uid="uid://ckks5sxlrrs0p" path="res://character/bat.tscn" id="1_f8qr0"]
+[ext_resource type="PackedScene" uid="uid://xa3sornhgorj" path="res://character/controller/ai_controller.tscn" id="2_kjxwc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sr87s"]
+radius = 150.0
+
+[node name="AiBat" type="Node2D"]
+script = ExtResource("1_df58w")
+
+[node name="AiController" parent="." node_paths=PackedStringArray("character") instance=ExtResource("2_kjxwc")]
+unique_name_in_owner = true
+character = NodePath("../Bat")
+
+[node name="Bat" parent="." instance=ExtResource("1_f8qr0")]
+unique_name_in_owner = true
+
+[node name="DetectionArea" type="Area2D" parent="Bat"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bat/DetectionArea"]
+shape = SubResource("CircleShape2D_sr87s")
+debug_color = Color(0.556863, 0.4, 1, 0.419608)
+
+[connection signal="body_entered" from="Bat/DetectionArea" to="." method="_on_detection_area_body_entered"]

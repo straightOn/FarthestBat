@@ -1,10 +1,13 @@
 class_name Bat extends CharacterBody2D
 
 @onready var animation_player: AnimationPlayer = %BatAnimation
-@onready var fly_animation: AnimationPlayer = %BatFlyAnimation
 @onready var score: Label = %Score
 @onready var label_animation: AnimationPlayer = %LabelAnimation
 @onready var stamina_bar: ProgressBar = %StaminaBar
+@onready var wind_particles_left = %WindParticlesLeft
+@onready var wind_particles_right = %WindParticlesRight
+@onready var caught_particles = %CaughtParticles
+
 
 const SPEED = 300.0
 const DECELERATION = 250.0
@@ -17,8 +20,11 @@ var stamina = 100
 var flap_cost = 2
 var flapping = false
 var direction = 0
+var active = true
 
 signal on_caught
+signal will_be_destroyed
+signal position_updated(new_position: Vector2)
 
 func _ready():
 	init()
@@ -29,34 +35,38 @@ func init():
 	flapping = true
 	
 func set_direction(new_direction: int):
+	if !active:
+		return
 	direction = new_direction
 
 func flap():
-	pass
+	if stamina <= 0 || !active:
+		return
+	velocity.y = FLAP_VELOCITY 
+	update_stamina(stamina - 2)
+	if !flapping:
+		flapping = true
+		animation_player.play("flap")
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	if velocity.y < 0:
 		animation_player.set_speed_scale(3.0)
+		# emit particle
+		wind_particles_left.emitting = true
+		wind_particles_right.emitting = true
 	else:
 		animation_player.set_speed_scale(1.0)
-	var direction = Input.get_axis("ui_left", "ui_right")
+		wind_particles_left.emitting = false
+		wind_particles_right.emitting = false
 	if direction:
 		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION*delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, DECELERATION * delta)
 	rotation_degrees = velocity.x / 10
 	move_and_slide()
-
-func _input(event):
-	if event.is_action_pressed("ui_accept"):
-		velocity.y = FLAP_VELOCITY
-		update_stamina(stamina - 2)
-		fly_animation.play("fly")
-		if !flapping:
-			flapping = true
-			animation_player.play("flap")
+	position_updated.emit(global_position)
 
 func update_stamina(new_stamina: float):
 	stamina = new_stamina
@@ -75,5 +85,11 @@ func _on_eat_area_body_entered(body):
 
 func caught():
 	# splatter-particle here
-	animation_player.play("caught")
+	active = false
+	caught_particles.emitting = true
 	on_caught.emit()
+	caught_particles.finished.connect(destroy)
+
+func destroy():
+	will_be_destroyed.emit()
+	queue_free()

@@ -20,7 +20,6 @@ position = Vector2(111, 719)
 position = Vector2(698, 600)
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 3.0
 autostart = true
 
 [connection signal="position_updated" from="AiBat" to="." method="_on_ai_bat_position_updated"]

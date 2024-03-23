@@ -6,7 +6,6 @@
 font_size = 50
 
 [node name="Ui" type="CanvasLayer"]
-visible = false
 script = ExtResource("1_o16fx")
 
 [node name="ScoreTimer" type="Timer" parent="."]
@@ -26,3 +25,5 @@ text = "0"
 label_settings = SubResource("LabelSettings_5yv4h")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

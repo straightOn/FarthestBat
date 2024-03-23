@@ -48,3 +48,6 @@ func on_animation_finished(signal_name: String):
 func destroy():
 	animation_player.animation_finished.disconnect(on_animation_finished)
 	queue_free()
+
+func has_positiv_hp():
+	return hp > 0

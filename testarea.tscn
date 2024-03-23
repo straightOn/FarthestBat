@@ -1,76 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8xu6pj73b3jv"]
+[gd_scene load_steps=8 format=3 uid="uid://c8xu6pj73b3jv"]
 
 [ext_resource type="Script" path="res://testarea.gd" id="1_3kbpe"]
-[ext_resource type="PackedScene" uid="uid://ckks5sxlrrs0p" path="res://character/bat.tscn" id="1_mbr66"]
 [ext_resource type="PackedScene" uid="uid://bwjwjc317hhkf" path="res://world/world.tscn" id="2_sv8tq"]
 [ext_resource type="PackedScene" uid="uid://bon7cove46jc4" path="res://world/spy_glass_overlay.tscn" id="2_tl0ve"]
 [ext_resource type="PackedScene" uid="uid://dpfykxenl6jar" path="res://world/fire_fly_container.tscn" id="3_5xs55"]
 [ext_resource type="PackedScene" uid="uid://bg5uxie7ahylk" path="res://character/ground_predator.tscn" id="5_6ths3"]
-[ext_resource type="PackedScene" uid="uid://du280fm5bxcu7" path="res://character/player_input.tscn" id="6_qprc5"]
+[ext_resource type="PackedScene" uid="uid://gb7kjb2o7ax7" path="res://character/player.tscn" id="5_malt0"]
 [ext_resource type="PackedScene" uid="uid://d2r6p1wjgwg6c" path="res://world/ui.tscn" id="8_w1m6l"]
-
-[sub_resource type="Animation" id="Animation_xdfmm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Player/Bat/Camera2D:zoom")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SpyGlassOverlay:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 900)]
-}
-
-[sub_resource type="Animation" id="Animation_oe04a"]
-resource_name = "zoom_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Player/Bat/Camera2D:zoom")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.5, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(2, 2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SpyGlassOverlay:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 900), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7tofy"]
-_data = {
-"RESET": SubResource("Animation_xdfmm"),
-"zoom_in": SubResource("Animation_oe04a")
-}
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_nmu2v"]
-radius = 50.0
 
 [node name="Testarea" type="Node2D"]
 script = ExtResource("1_3kbpe")
@@ -79,50 +15,14 @@ script = ExtResource("1_3kbpe")
 
 [node name="FireFlyContainer" parent="." instance=ExtResource("3_5xs55")]
 
-[node name="Player" type="Node2D" parent="."]
-
-[node name="Bat" parent="Player" instance=ExtResource("1_mbr66")]
-unique_name_in_owner = true
-position = Vector2(698, 582)
-
-[node name="Camera2D" type="Camera2D" parent="Player/Bat"]
-unique_name_in_owner = true
-position = Vector2(-1, 0)
-limit_left = 0
-limit_top = 0
-limit_right = 1280
-limit_bottom = 768
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
-
-[node name="CameraAnimation" type="AnimationPlayer" parent="Player/Bat"]
-unique_name_in_owner = true
-root_node = NodePath("../../..")
-libraries = {
-"": SubResource("AnimationLibrary_7tofy")
-}
-
-[node name="MouseArea" type="Area2D" parent="Player/Bat"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Bat/MouseArea"]
-shape = SubResource("CircleShape2D_nmu2v")
-
-[node name="GroundPredator" parent="Player" instance=ExtResource("5_6ths3")]
+[node name="GroundPredator" parent="." instance=ExtResource("5_6ths3")]
 position = Vector2(111, 719)
 
-[node name="PlayerInput" parent="Player" instance=ExtResource("6_qprc5")]
+[node name="Player" parent="." instance=ExtResource("5_malt0")]
+unique_name_in_owner = true
 
 [node name="SpyGlassOverlay" parent="." instance=ExtResource("2_tl0ve")]
 unique_name_in_owner = true
-offset = Vector2(0, 900)
-transform = Transform2D(1, 0, 0, 1, 0, 900)
 
 [node name="Ui" parent="." instance=ExtResource("8_w1m6l")]
 unique_name_in_owner = true
-
-[connection signal="input_event" from="Player/Bat" to="." method="_on_player_input_event"]
-[connection signal="mouse_entered" from="Player/Bat" to="." method="_on_player_mouse_entered"]
-[connection signal="mouse_exited" from="Player/Bat" to="." method="_on_player_mouse_exited"]
-[connection signal="input_event" from="Player/Bat/MouseArea" to="." method="_on_mouse_area_input_event"]
-[connection signal="mouse_entered" from="Player/Bat/MouseArea" to="." method="_on_mouse_area_mouse_entered"]
-[connection signal="mouse_exited" from="Player/Bat/MouseArea" to="." method="_on_mouse_area_mouse_exited"]

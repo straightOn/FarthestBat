@@ -12,11 +12,16 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var target
 var direction = 1
+var max_range = 300
 
 func _physics_process(_delta):
-
+	if target && !is_instance_valid(target):
+		target_lost()
 	if target:
-		velocity.x = global_position.direction_to(target.global_position).x * CHASE_SPEED
+		if global_position.distance_to(target.global_position) > max_range:
+			target_lost()
+		else:
+			velocity.x = global_position.direction_to(target.global_position).x * CHASE_SPEED
 	else:
 		if direction:
 			velocity.x = direction * SPEED
@@ -37,10 +42,13 @@ func _on_detection_body_entered(body):
 
 func _on_detection_body_exited(body):
 	if body is Bat:
-		animation_player.play_backwards("attention")
-		direction = 1
-		target = null
+		target_lost()
 
+func target_lost():
+	animation_player.play_backwards("attention")
+	direction = 1
+	target = null
+	
 
 func _on_attack_body_entered(body):
 	if body is Bat:

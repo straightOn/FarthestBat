@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwjwjc317hhkf"]
+[gd_scene load_steps=7 format=3 uid="uid://bwjwjc317hhkf"]
 
 [ext_resource type="Texture2D" uid="uid://ip6x04vaj5ue" path="res://assets/background.png" id="1_af8rd"]
 
@@ -12,8 +12,6 @@ normal = Vector2(-1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lsdmn"]
 normal = Vector2(0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oac1y"]
 
 [sub_resource type="Environment" id="Environment_wrhyu"]
 background_mode = 3
@@ -52,10 +50,6 @@ shape = SubResource("WorldBoundaryShape2D_a7nvm")
 [node name="Top" type="CollisionShape2D" parent="Borders"]
 position = Vector2(2, -757)
 shape = SubResource("WorldBoundaryShape2D_lsdmn")
-
-[node name="Podest" type="CollisionShape2D" parent="Borders"]
-position = Vector2(22, -151)
-shape = SubResource("RectangleShape2D_oac1y")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wrhyu")

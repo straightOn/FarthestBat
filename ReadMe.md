@@ -31,6 +31,8 @@
 - ui (energy, current score)
 - catch-particles (game-over)
 - fly-particles
+- particles when eating
+- particles when spawning fireflys
 
 # 2do:
 - options (glow, volume)
@@ -40,7 +42,6 @@
 - intro (command-pattern)
 - game-over-screen (highscores)
 - audio
-- particles
 - ai-bats
 - game-icon
 - splash-screen
