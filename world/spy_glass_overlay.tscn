@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bon7cove46jc4"]
+
+[ext_resource type="Shader" path="res://shader/spy_glass_overlay.gdshader" id="1_i3n77"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_730n4"]
+shader = ExtResource("1_i3n77")
+shader_parameter/player_position = Vector2(0.6, 0.55)
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/MULTIPLIER = 1.5
+shader_parameter/SCALE = 3.0
+shader_parameter/SOFTNESS = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7us5y"]
+shader = ExtResource("1_i3n77")
+shader_parameter/player_position = Vector2(0.4, 0.55)
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/MULTIPLIER = 1.5
+shader_parameter/SCALE = 3.0
+shader_parameter/SOFTNESS = 0.3
+
+[node name="SpyGlassOverlay" type="CanvasLayer"]
+
+[node name="Left" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_730n4")
+custom_minimum_size = Vector2(640, 768)
+offset_right = 640.0
+offset_bottom = 768.0
+color = Color(0, 0, 0, 1)
+
+[node name="Right" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_7us5y")
+custom_minimum_size = Vector2(640, 768)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -640.0
+offset_bottom = 768.0
+grow_horizontal = 0
+color = Color(0, 0, 0, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, 0, 80, -70, 180, -100, 490, -100, 560, -70, 640, 0, 710, -70, 790, -100, 1100, -100, 1200, -70, 1280, 0)

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://di8v7m6xuhd0d"]
+
+[ext_resource type="Script" path="res://world/firefly.gd" id="1_waugq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rm6tw"]
+radius = 5.0
+
+[sub_resource type="Gradient" id="Gradient_0vj6a"]
+offsets = PackedFloat32Array(0, 0.278689)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2a3hq"]
+gradient = SubResource("Gradient_0vj6a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ktdxm"]
+lifetime_randomness = 0.1
+direction = Vector3(1, 1, 1)
+radial_velocity_max = 360.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.0
+scale_max = 1.5
+color_ramp = SubResource("GradientTexture1D_2a3hq")
+anim_speed_max = 1.0
+
+[node name="Firefly" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_waugq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rm6tw")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+color = Color(0.654902, 1, 0, 1)
+polygon = PackedVector2Array(-5, 0, 0, -5, 5, 0, 0, 5)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+amount = 100
+amount_ratio = 0.5
+process_material = SubResource("ParticleProcessMaterial_ktdxm")

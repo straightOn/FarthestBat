@@ -1,0 +1,165 @@
+[gd_scene load_steps=8 format=3 uid="uid://bg5uxie7ahylk"]
+
+[ext_resource type="Script" path="res://character/ground_predator.gd" id="1_g4ws5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_phoaf"]
+radius = 24.0
+height = 48.0
+
+[sub_resource type="Animation" id="Animation_blv6f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyPolygons/Mouth:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.196078)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodyPolygons/Eyes:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.196078)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BodyPolygons/Eyes:polygon")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(-8, 0, -7.66667, -1, 0, -1, 7.66667, -1, 8, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BodyPolygons/Mouth:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(-10, 11, 10, 11, 9, 16, 6, 12, -6, 12, -9, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_fg3ef"]
+resource_name = "attention"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyPolygons/Mouth:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.196078), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodyPolygons/Eyes:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.196078), Color(1, 0, 0, 1), Color(1, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BodyPolygons/Eyes:polygon")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedVector2Array(-8, 0, -7.66667, -1, 0, -1, 7.66667, -1, 8, 0, 0, 1), PackedVector2Array(-7.33333, 1, -7.66667, -2, 0, 0, 7.66667, -2, 7.33333, 1, 0, 0.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BodyPolygons/Mouth:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedVector2Array(-10, 11, 10, 11, 9, 12, 6, 12, -6, 12, -10, 12), PackedVector2Array(-10, 11, 10, 11, 9, 16, 6, 12, -6, 12, -9, 16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tyqcv"]
+_data = {
+"RESET": SubResource("Animation_blv6f"),
+"attention": SubResource("Animation_fg3ef")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cpyua"]
+radius = 100.0
+height = 800.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0kccq"]
+radius = 40.0
+
+[node name="GroundPredator" type="CharacterBody2D"]
+script = ExtResource("1_g4ws5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_phoaf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_tyqcv")
+}
+
+[node name="Detection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_cpyua")
+
+[node name="Attack" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+shape = SubResource("CircleShape2D_0kccq")
+
+[node name="BodyPolygons" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Head" type="Polygon2D" parent="BodyPolygons"]
+color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+polygon = PackedVector2Array(-25, 0, -16, -29, -15, -16, 0, -18, 13, -16, 15, -30, 25, 0, 20, 13, 0, 24, -19, 15)
+
+[node name="Eyes" type="Polygon2D" parent="BodyPolygons"]
+scale = Vector2(2, 2)
+color = Color(1, 0, 0, 0.196078)
+polygon = PackedVector2Array(-8, 0, -7.66667, -1, 0, -1, 7.66667, -1, 8, 0, 0, 1)
+
+[node name="Mouth" type="Polygon2D" parent="BodyPolygons"]
+color = Color(1, 1, 1, 0.196078)
+polygon = PackedVector2Array(-10, 11, 10, 11, 9, 16, 6, 12, -6, 12, -9, 16)
+
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_exited" from="Detection" to="." method="_on_detection_body_exited"]
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
