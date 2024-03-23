@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpfykxenl6jar"]
+
+[ext_resource type="PackedScene" uid="uid://bhkbqk1g6n4fc" path="res://world/firefly_spawner.tscn" id="1_n8bay"]
+
+[node name="FireFlyContainer" type="Node2D"]
+
+[node name="FireflySpawner" parent="." instance=ExtResource("1_n8bay")]
+position = Vector2(429, 130)
+
+[node name="FireflySpawner2" parent="." instance=ExtResource("1_n8bay")]
+position = Vector2(791, 368)
+
+[node name="FireflySpawner3" parent="." instance=ExtResource("1_n8bay")]
+position = Vector2(321, 499)
+
+[node name="FireflySpawner4" parent="." instance=ExtResource("1_n8bay")]
+position = Vector2(1068, 295)

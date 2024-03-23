@@ -1,44 +1,20 @@
-[gd_scene load_steps=18 format=3 uid="uid://c8xu6pj73b3jv"]
+[gd_scene load_steps=13 format=3 uid="uid://c8xu6pj73b3jv"]
 
 [ext_resource type="Script" path="res://testarea.gd" id="1_3kbpe"]
 [ext_resource type="PackedScene" uid="uid://ckks5sxlrrs0p" path="res://character/bat.tscn" id="1_mbr66"]
-[ext_resource type="Texture2D" uid="uid://ip6x04vaj5ue" path="res://assets/background.png" id="2_sevyk"]
+[ext_resource type="PackedScene" uid="uid://bwjwjc317hhkf" path="res://world/world.tscn" id="2_sv8tq"]
 [ext_resource type="PackedScene" uid="uid://bon7cove46jc4" path="res://world/spy_glass_overlay.tscn" id="2_tl0ve"]
-[ext_resource type="PackedScene" uid="uid://bhkbqk1g6n4fc" path="res://world/firefly_spawner.tscn" id="3_66t3i"]
+[ext_resource type="PackedScene" uid="uid://dpfykxenl6jar" path="res://world/fire_fly_container.tscn" id="3_5xs55"]
 [ext_resource type="PackedScene" uid="uid://bg5uxie7ahylk" path="res://character/ground_predator.tscn" id="5_6ths3"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v01u3"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4wt0d"]
-normal = Vector2(1, 0)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_a7nvm"]
-normal = Vector2(-1, 0)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lsdmn"]
-normal = Vector2(0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oac1y"]
-
-[sub_resource type="Environment" id="Environment_wrhyu"]
-background_mode = 3
-glow_enabled = true
-glow_levels/1 = 0.9
-glow_levels/2 = 1.32
-glow_levels/4 = 1.68
-glow_normalized = true
-glow_intensity = 2.43
-glow_strength = 1.44
-glow_blend_mode = 0
-glow_hdr_threshold = 0.0
-glow_hdr_luminance_cap = 21.01
+[ext_resource type="PackedScene" uid="uid://du280fm5bxcu7" path="res://character/player_input.tscn" id="6_qprc5"]
+[ext_resource type="PackedScene" uid="uid://d2r6p1wjgwg6c" path="res://world/ui.tscn" id="8_w1m6l"]
 
 [sub_resource type="Animation" id="Animation_xdfmm"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Player/Camera2D:zoom")
+tracks/0/path = NodePath("Player/Bat/Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -65,7 +41,7 @@ resource_name = "zoom_in"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Player/Camera2D:zoom")
+tracks/0/path = NodePath("Player/Bat/Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -96,65 +72,20 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_nmu2v"]
 radius = 50.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_5yv4h"]
-font_size = 50
-
 [node name="Testarea" type="Node2D"]
 script = ExtResource("1_3kbpe")
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" parent="." instance=ExtResource("2_sv8tq")]
 
-[node name="Background" type="Sprite2D" parent="World"]
-texture = ExtResource("2_sevyk")
-centered = false
+[node name="FireFlyContainer" parent="." instance=ExtResource("3_5xs55")]
 
-[node name="Borders" type="StaticBody2D" parent="World"]
-position = Vector2(677, 766)
+[node name="Player" type="Node2D" parent="."]
 
-[node name="Bottom" type="CollisionShape2D" parent="World/Borders"]
-position = Vector2(0, -20)
-shape = SubResource("WorldBoundaryShape2D_v01u3")
-
-[node name="Left" type="CollisionShape2D" parent="World/Borders"]
-position = Vector2(-677, -405)
-shape = SubResource("WorldBoundaryShape2D_4wt0d")
-
-[node name="Right" type="CollisionShape2D" parent="World/Borders"]
-position = Vector2(602, -405)
-shape = SubResource("WorldBoundaryShape2D_a7nvm")
-
-[node name="Top" type="CollisionShape2D" parent="World/Borders"]
-position = Vector2(2, -757)
-shape = SubResource("WorldBoundaryShape2D_lsdmn")
-
-[node name="Podest" type="CollisionShape2D" parent="World/Borders"]
-position = Vector2(22, -151)
-shape = SubResource("RectangleShape2D_oac1y")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
-environment = SubResource("Environment_wrhyu")
-
-[node name="FireFlyContainer" type="Node2D" parent="."]
-
-[node name="FireflySpawner" parent="FireFlyContainer" instance=ExtResource("3_66t3i")]
-position = Vector2(429, 130)
-
-[node name="FireflySpawner2" parent="FireFlyContainer" instance=ExtResource("3_66t3i")]
-position = Vector2(791, 368)
-
-[node name="FireflySpawner3" parent="FireFlyContainer" instance=ExtResource("3_66t3i")]
-position = Vector2(321, 499)
-
-[node name="FireflySpawner4" parent="FireFlyContainer" instance=ExtResource("3_66t3i")]
-position = Vector2(1068, 295)
-
-[node name="Character" type="Node2D" parent="."]
-
-[node name="Player" parent="Character" instance=ExtResource("1_mbr66")]
+[node name="Bat" parent="Player" instance=ExtResource("1_mbr66")]
 unique_name_in_owner = true
 position = Vector2(698, 582)
 
-[node name="Camera2D" type="Camera2D" parent="Character/Player"]
+[node name="Camera2D" type="Camera2D" parent="Player/Bat"]
 unique_name_in_owner = true
 position = Vector2(-1, 0)
 limit_left = 0
@@ -164,52 +95,34 @@ limit_bottom = 768
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
-[node name="CameraAnimation" type="AnimationPlayer" parent="Character/Player"]
+[node name="CameraAnimation" type="AnimationPlayer" parent="Player/Bat"]
 unique_name_in_owner = true
 root_node = NodePath("../../..")
 libraries = {
 "": SubResource("AnimationLibrary_7tofy")
 }
 
-[node name="MouseArea" type="Area2D" parent="Character/Player"]
+[node name="MouseArea" type="Area2D" parent="Player/Bat"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Character/Player/MouseArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Bat/MouseArea"]
 shape = SubResource("CircleShape2D_nmu2v")
 
-[node name="GroundPredator" parent="Character" instance=ExtResource("5_6ths3")]
+[node name="GroundPredator" parent="Player" instance=ExtResource("5_6ths3")]
 position = Vector2(111, 719)
+
+[node name="PlayerInput" parent="Player" instance=ExtResource("6_qprc5")]
 
 [node name="SpyGlassOverlay" parent="." instance=ExtResource("2_tl0ve")]
 unique_name_in_owner = true
 offset = Vector2(0, 900)
 transform = Transform2D(1, 0, 0, 1, 0, 900)
 
-[node name="Ui" type="CanvasLayer" parent="."]
+[node name="Ui" parent="." instance=ExtResource("8_w1m6l")]
 unique_name_in_owner = true
-visible = false
 
-[node name="ScoreTimer" type="Timer" parent="Ui"]
-unique_name_in_owner = true
-wait_time = 0.1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Ui"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 69.0
-grow_horizontal = 2
-
-[node name="ScoreLabel" type="Label" parent="Ui/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "0"
-label_settings = SubResource("LabelSettings_5yv4h")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[connection signal="input_event" from="Character/Player" to="." method="_on_player_input_event"]
-[connection signal="mouse_entered" from="Character/Player" to="." method="_on_player_mouse_entered"]
-[connection signal="mouse_exited" from="Character/Player" to="." method="_on_player_mouse_exited"]
-[connection signal="input_event" from="Character/Player/MouseArea" to="." method="_on_mouse_area_input_event"]
-[connection signal="mouse_entered" from="Character/Player/MouseArea" to="." method="_on_mouse_area_mouse_entered"]
-[connection signal="mouse_exited" from="Character/Player/MouseArea" to="." method="_on_mouse_area_mouse_exited"]
-[connection signal="timeout" from="Ui/ScoreTimer" to="." method="_on_timer_timeout"]
+[connection signal="input_event" from="Player/Bat" to="." method="_on_player_input_event"]
+[connection signal="mouse_entered" from="Player/Bat" to="." method="_on_player_mouse_entered"]
+[connection signal="mouse_exited" from="Player/Bat" to="." method="_on_player_mouse_exited"]
+[connection signal="input_event" from="Player/Bat/MouseArea" to="." method="_on_mouse_area_input_event"]
+[connection signal="mouse_entered" from="Player/Bat/MouseArea" to="." method="_on_mouse_area_mouse_entered"]
+[connection signal="mouse_exited" from="Player/Bat/MouseArea" to="." method="_on_mouse_area_mouse_exited"]

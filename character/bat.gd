@@ -16,6 +16,7 @@ var gravity = 200
 var stamina = 100
 var flap_cost = 2
 var flapping = false
+var direction = 0
 
 signal on_caught
 
@@ -26,6 +27,12 @@ func init():
 	stamina = 100
 	animation_player.play("flap")
 	flapping = true
+	
+func set_direction(new_direction: int):
+	direction = new_direction
+
+func flap():
+	pass
 
 func _physics_process(delta):
 	if not is_on_floor():

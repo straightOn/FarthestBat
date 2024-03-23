@@ -21,11 +21,11 @@ scale_max = 1.5
 color_ramp = SubResource("GradientTexture1D_2a3hq")
 anim_speed_max = 1.0
 
-[sub_resource type="Animation" id="Animation_8fyme"]
-resource_name = "spawn"
-
 [sub_resource type="Animation" id="Animation_l2py0"]
 resource_name = "despawn"
+
+[sub_resource type="Animation" id="Animation_8fyme"]
+resource_name = "spawn"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kfiri"]
 _data = {

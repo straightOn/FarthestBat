@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwjwjc317hhkf"]
+
+[ext_resource type="Texture2D" uid="uid://ip6x04vaj5ue" path="res://assets/background.png" id="1_af8rd"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v01u3"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4wt0d"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_a7nvm"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lsdmn"]
+normal = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oac1y"]
+
+[sub_resource type="Environment" id="Environment_wrhyu"]
+background_mode = 3
+glow_enabled = true
+glow_levels/1 = 0.9
+glow_levels/2 = 1.32
+glow_levels/4 = 1.68
+glow_normalized = true
+glow_intensity = 2.43
+glow_strength = 1.44
+glow_blend_mode = 0
+glow_hdr_threshold = 0.0
+glow_hdr_luminance_cap = 21.01
+
+[node name="World" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_af8rd")
+centered = false
+
+[node name="Borders" type="StaticBody2D" parent="."]
+position = Vector2(677, 766)
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders"]
+position = Vector2(0, -20)
+shape = SubResource("WorldBoundaryShape2D_v01u3")
+
+[node name="Left" type="CollisionShape2D" parent="Borders"]
+position = Vector2(-677, -405)
+shape = SubResource("WorldBoundaryShape2D_4wt0d")
+
+[node name="Right" type="CollisionShape2D" parent="Borders"]
+position = Vector2(602, -405)
+shape = SubResource("WorldBoundaryShape2D_a7nvm")
+
+[node name="Top" type="CollisionShape2D" parent="Borders"]
+position = Vector2(2, -757)
+shape = SubResource("WorldBoundaryShape2D_lsdmn")
+
+[node name="Podest" type="CollisionShape2D" parent="Borders"]
+position = Vector2(22, -151)
+shape = SubResource("RectangleShape2D_oac1y")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wrhyu")
