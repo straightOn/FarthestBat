@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=3 uid="uid://qaxnalmeomkd"]
+
+[ext_resource type="PackedScene" uid="uid://bwjwjc317hhkf" path="res://world/world.tscn" id="1_1s2t4"]
+[ext_resource type="Script" path="res://scenes/game_over.gd" id="1_fwl5q"]
+[ext_resource type="PackedScene" uid="uid://dpfykxenl6jar" path="res://world/fire_fly_container.tscn" id="2_rdxsa"]
+[ext_resource type="PackedScene" uid="uid://dxxeuitbw2hjh" path="res://helper/scene_switcher.tscn" id="3_03j37"]
+[ext_resource type="PackedScene" uid="uid://c8xu6pj73b3jv" path="res://scenes/game.tscn" id="4_2x61m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_k18jl"]
+font_size = 80
+font_color = Color(1, 1, 1, 0.588235)
+shadow_color = Color(0, 0, 0, 0.392157)
+shadow_offset = Vector2(4, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3g0gc"]
+font_size = 50
+font_color = Color(1, 1, 1, 0.588235)
+shadow_color = Color(0, 0, 0, 0.392157)
+shadow_offset = Vector2(4, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_roohm"]
+font_size = 30
+font_color = Color(1, 1, 1, 0.588235)
+shadow_color = Color(0, 0, 0, 0.392157)
+shadow_offset = Vector2(4, 1)
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_fwl5q")
+
+[node name="World" parent="." instance=ExtResource("1_1s2t4")]
+
+[node name="FireFlyContainer" parent="." instance=ExtResource("2_rdxsa")]
+
+[node name="SceneSwitcher" parent="." instance=ExtResource("3_03j37")]
+unique_name_in_owner = true
+layer = 2
+next_scene_path = ExtResource("4_2x61m")
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="GameOver"]
+offset_left = 305.0
+offset_top = 91.0
+offset_right = 974.0
+offset_bottom = 201.0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_k18jl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="GameOver"]
+offset_left = 305.0
+offset_top = 171.0
+offset_right = 974.0
+offset_bottom = 281.0
+text = "MV-(Oster)Game Jam 2024"
+label_settings = SubResource("LabelSettings_3g0gc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" type="Label" parent="GameOver"]
+offset_left = 305.0
+offset_top = 251.0
+offset_right = 974.0
+offset_bottom = 613.0
+text = "Credits:
+Entwickler: Robert Mietusch
+Partikel: Maximilian Deutsch
+Vignette-Shader: Beepster
+Knurren: Christoph Bruch
+Flattern & Plopp: Arne Berg
+Hintergrundbild: AI-Generated"
+label_settings = SubResource("LabelSettings_roohm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Replay" type="Button" parent="GameOver"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -73.5
+offset_top = -141.0
+offset_right = 73.5
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Nochmal Spielen"
+
+[connection signal="pressed" from="GameOver/Replay" to="." method="_on_replay_pressed"]

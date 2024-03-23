@@ -12,6 +12,8 @@ var min_distance = 50
 var max_distance = 200
 var speed = 100
 
+signal destroyed
+
 func _ready():
 	hp = randi_range(min_hp, max_hp)
 	color = ColorProvider.get_color_by_index(hp + 3)
@@ -47,6 +49,7 @@ func on_animation_finished(signal_name: String):
 
 func destroy():
 	animation_player.animation_finished.disconnect(on_animation_finished)
+	destroyed.emit()
 	queue_free()
 
 func has_positiv_hp():

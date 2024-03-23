@@ -33,21 +33,31 @@
 - fly-particles
 - particles when eating
 - particles when spawning fireflys
+- game-icon
+- intro (command-pattern)
+- name input
 
 # 2do:
-- options (glow, volume)
-- name input
-- gravelpoint
 - start-screen (task, controls)
-- intro (command-pattern)
 - game-over-screen (highscores)
 - audio
 - ai-bats
-- game-icon
 - splash-screen
 
+- bugfixing
+
+- shake-effect
+- options (glow, volume)
+- gravelpoint
+
 # used stuff
-## spy-glass-icon:
-- https://www.flaticon.com/de/kostenloses-icon/fernglas_123377?term=fernglas&page=1&position=13&origin=tag&related_id=123377
 ## shader
 - https://godotshaders.com/shader/player-vignette/
+## audio
+- knurren -> Christoph Bruch
+- flattern & plopp: Arne Berg
+## particles
+- firefly spawn/despawn: Max
+- 
+## visuals
+- background: ai
