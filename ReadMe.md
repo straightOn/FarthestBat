@@ -16,6 +16,7 @@
 # nice
 - particles when eating
 - particles when spawning fireflys
+- catch-particles (game-over)
 - fly-particles
 
 # done:
@@ -29,6 +30,7 @@
 - eat
 - ui (energy, current score)
 - catch-particles (game-over)
+- fly-particles
 
 # 2do:
 - options (glow, volume)
