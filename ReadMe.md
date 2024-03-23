@@ -28,10 +28,10 @@
 - chase
 - catch
 - eat
+- ui (energy, current score)
 
 # 2do:
-- ui (energy, current score, highscores)
-- options (glow)
+- options (glow, volume)
 - name input
 - gravelpoint
 - start-screen (task, controls)
@@ -40,6 +40,8 @@
 - audio
 - particles
 - ai-bats
+- game-icon
+- splash-screen
 
 # used stuff
 ## spy-glass-icon:

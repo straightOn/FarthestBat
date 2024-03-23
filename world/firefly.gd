@@ -11,22 +11,9 @@ var min_distance = 50
 var max_distance = 200
 var speed = 100
 
-var colors: Array[Color] = [
-	Color(0.86, 0.08, 0.24), #dark red
-	Color(1,0,0), #red
-	Color(1, 0.14, 0), #vibrant red-orange
-	Color(1, 0.39, 0.28), #bright orange-red
-	Color(1, 0.55, 0), #dark orange
-	Color(1, 1, 0), # pure yellow
-	Color(1, 0.84, 0), #golden yellow
-	Color(0.5, 1, 0), #bright green-yellow
-	Color(0.5, 1, 0.2), #vibrant yellow-green
-	Color(0, 1, 0) #pure green
-]
-
 func _ready():
 	hp = randi_range(min_hp, max_hp)
-	color = colors[hp + 3]
+	color = ColorProvider.get_color_by_index(hp + 3)
 	polygon_2d.color = color
 	gpu_particles_2d.process_material.color = color
 

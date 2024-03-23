@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c8xu6pj73b3jv"]
+[gd_scene load_steps=18 format=3 uid="uid://c8xu6pj73b3jv"]
 
 [ext_resource type="Script" path="res://testarea.gd" id="1_3kbpe"]
 [ext_resource type="PackedScene" uid="uid://ckks5sxlrrs0p" path="res://character/bat.tscn" id="1_mbr66"]
@@ -96,6 +96,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_nmu2v"]
 radius = 50.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_5yv4h"]
+font_size = 50
+
 [node name="Testarea" type="Node2D"]
 script = ExtResource("1_3kbpe")
 
@@ -181,6 +184,28 @@ unique_name_in_owner = true
 offset = Vector2(0, 900)
 transform = Transform2D(1, 0, 0, 1, 0, 900)
 
+[node name="Ui" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="ScoreTimer" type="Timer" parent="Ui"]
+unique_name_in_owner = true
+wait_time = 0.1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 69.0
+grow_horizontal = 2
+
+[node name="ScoreLabel" type="Label" parent="Ui/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_5yv4h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="input_event" from="Character/Player" to="." method="_on_player_input_event"]
 [connection signal="mouse_entered" from="Character/Player" to="." method="_on_player_mouse_entered"]
 [connection signal="mouse_exited" from="Character/Player" to="." method="_on_player_mouse_exited"]
@@ -188,3 +213,4 @@ transform = Transform2D(1, 0, 0, 1, 0, 900)
 [connection signal="input_event" from="Character/Player/MouseArea" to="." method="_on_mouse_area_input_event"]
 [connection signal="mouse_entered" from="Character/Player/MouseArea" to="." method="_on_mouse_area_mouse_entered"]
 [connection signal="mouse_exited" from="Character/Player/MouseArea" to="." method="_on_mouse_area_mouse_exited"]
+[connection signal="timeout" from="Ui/ScoreTimer" to="." method="_on_timer_timeout"]
