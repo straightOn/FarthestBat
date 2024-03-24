@@ -1,19 +1,23 @@
 class_name PlayerUi extends CanvasLayer
 
-@onready var score_timer: Timer = %ScoreTimer
 @onready var score_label: Label = %ScoreLabel
+@onready var score_animator = %ScoreAnimator
 
-var score: float = 0
-
-func _on_score_timer_timeout():
-	score += 1
-	score_label.text = str(score)
-
-func start_timer():
-	score_timer.start()
+var score: int = 0
+signal finished_animation_done
 	
-func stop_timer():
-	score_timer.stop()
+func game_over():
+	score_animator.play("finished")
+	await score_animator.animation_finished
+	finished_animation_done.emit()
 
-func reset():
-	score = 0
+func add_score(amount: int):
+	update_score(amount)
+	
+func update_score(amount: int):
+	score += amount
+	score_label.text = "Score: " + str(score)
+	if amount > 0:
+		score_animator.play("pulse_green")
+	else:
+		score_animator.play("pulse_red")

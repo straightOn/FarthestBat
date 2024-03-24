@@ -3,6 +3,7 @@ extends Area2D
 @onready var collision_shape_2d = %CollisionShape2D
 @onready var fire_fly_scene = preload("res://world/firefly.tscn")
 @onready var spawn_timer: Timer = %SpawnTimer
+@onready var spawn_audio = %SpawnAudio
 
 var min_amount = 5
 var max_amount = 15
@@ -33,6 +34,7 @@ func create():
 	new_firefly.position = get_random_location_in_area()
 	new_firefly.destroyed.connect(on_firefly_destroyed)
 	collision_shape_2d.add_child(new_firefly)
+	spawn_audio.play()
 	amount += 1
 
 func on_firefly_destroyed():

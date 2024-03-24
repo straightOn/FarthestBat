@@ -1,21 +1,29 @@
 class_name SceneSwitcher extends CanvasLayer
 
-@export var next_scene_path: PackedScene
+@export var next_scene_path: String
+@export var use_sprite = false
 @onready var background = %Background
+@onready var sprite_2d = %Sprite2D
+
+func _process(delta):
+	if visible:
+		pass
+	pass
 
 func _ready() -> void:
-	background.position = Vector2(0, 0)
-	background.modulate = Color.BLACK
+	if use_sprite:
+		sprite_2d.show()
 	var tween = create_tween()
-	tween.tween_property(background, "modulate", Color.TRANSPARENT, 2)
-	tween.play()
-	await tween.finished	
-	background.position = Vector2(0, 768)
-	background.modulate = Color.BLACK
-
-func transition_to(_next_scene := next_scene_path) -> void:
-	var tween = create_tween()
-	tween.tween_property(background, "position", Vector2(0, 0), 1)
+	tween.tween_property(background, "modulate", Color(0,0,0,0), 2)
 	tween.play()
 	await tween.finished
-	get_tree().change_scene_to_packed(_next_scene)
+	hide()
+
+func transition_to(_next_scene: String = next_scene_path) -> void:
+	show()
+	var new_scene = load(_next_scene)
+	var tween = create_tween()
+	tween.tween_property(background, "modulate", Color.BLACK, 2)
+	tween.play()
+	await tween.finished
+	get_tree().change_scene_to_packed(new_scene)

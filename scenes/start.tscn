@@ -1,17 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://kds08jouk45x"]
+[gd_scene load_steps=7 format=3 uid="uid://kds08jouk45x"]
 
 [ext_resource type="PackedScene" uid="uid://bwjwjc317hhkf" path="res://world/world.tscn" id="1_5r0cm"]
 [ext_resource type="Script" path="res://scenes/start.gd" id="1_hnvaa"]
 [ext_resource type="PackedScene" uid="uid://dpfykxenl6jar" path="res://world/fire_fly_container.tscn" id="2_dylnv"]
 [ext_resource type="PackedScene" uid="uid://bg5uxie7ahylk" path="res://character/ground_predator.tscn" id="3_f0r7d"]
 [ext_resource type="PackedScene" uid="uid://dxxeuitbw2hjh" path="res://helper/scene_switcher.tscn" id="5_4limy"]
-[ext_resource type="PackedScene" uid="uid://c8xu6pj73b3jv" path="res://scenes/game.tscn" id="6_f1mj4"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_5fiu0"]
-font_size = 80
-font_color = Color(1, 1, 1, 0.588235)
-shadow_color = Color(0, 0, 0, 0.392157)
-shadow_offset = Vector2(4, 1)
+[ext_resource type="LabelSettings" uid="uid://dsnteh7tn034" path="res://resources/font.tres" id="7_077ko"]
 
 [node name="Start" type="Node2D"]
 script = ExtResource("1_hnvaa")
@@ -30,7 +24,8 @@ autostart = true
 [node name="SceneSwitcher" parent="." instance=ExtResource("5_4limy")]
 unique_name_in_owner = true
 layer = 2
-next_scene_path = ExtResource("6_f1mj4")
+next_scene_path = "res://scenes/game.tscn"
+use_sprite = true
 
 [node name="Menu" type="CanvasLayer" parent="."]
 
@@ -40,11 +35,11 @@ offset_top = 323.0
 offset_right = 974.0
 offset_bottom = 433.0
 text = "Luminous Leaper"
-label_settings = SubResource("LabelSettings_5fiu0")
+label_settings = ExtResource("7_077ko")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerName" type="TextEdit" parent="Menu"]
+[node name="PlayerName" type="LineEdit" parent="Menu"]
 unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -58,6 +53,7 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 placeholder_text = "Name"
+max_length = 20
 
 [node name="Button" type="Button" parent="Menu"]
 anchors_preset = 8
@@ -74,4 +70,5 @@ grow_vertical = 2
 text = "Los"
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="text_submitted" from="Menu/PlayerName" to="." method="_on_player_name_text_submitted"]
 [connection signal="pressed" from="Menu/Button" to="." method="_on_button_pressed"]

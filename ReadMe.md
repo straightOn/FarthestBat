@@ -1,3 +1,6 @@
+# title
+- Luminous Leaper
+
 # idea
 - bat needs food an hunts fireflys
 - bat runs out of energy when flapping
@@ -36,19 +39,26 @@
 - game-icon
 - intro (command-pattern)
 - name input
-
-# 2do:
-- start-screen (task, controls)
-- game-over-screen (highscores)
-- audio
+- start-screen (task)
+- game-over-screen
+- freeze on start
+- name-usage (cheat - nr. of bats)
+    - batman = endless stamina
 - ai-bats
+- score big after dead
+- audio
+    - catched, game_over, background
+- predator move particle
+- score-counter-effect
+- restart
 - splash-screen
 
+# 2do:
 - bugfixing
-
+    - disabled input while transitioning
+    - flickering stamina bar at low stamina
+    - flickering transition between scenes
 - shake-effect
-- options (glow, volume)
-- gravelpoint
 
 # used stuff
 ## shader

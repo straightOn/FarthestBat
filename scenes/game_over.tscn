@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/game_over.gd" id="1_fwl5q"]
 [ext_resource type="PackedScene" uid="uid://dpfykxenl6jar" path="res://world/fire_fly_container.tscn" id="2_rdxsa"]
 [ext_resource type="PackedScene" uid="uid://dxxeuitbw2hjh" path="res://helper/scene_switcher.tscn" id="3_03j37"]
-[ext_resource type="PackedScene" uid="uid://c8xu6pj73b3jv" path="res://scenes/game.tscn" id="4_2x61m"]
+[ext_resource type="AudioStream" uid="uid://ci85yy7o1bjyd" path="res://assets/cheer.mp3" id="5_o156l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k18jl"]
 font_size = 80
@@ -34,7 +34,7 @@ script = ExtResource("1_fwl5q")
 [node name="SceneSwitcher" parent="." instance=ExtResource("3_03j37")]
 unique_name_in_owner = true
 layer = 2
-next_scene_path = ExtResource("4_2x61m")
+next_scene_path = "res://scenes/game.tscn"
 
 [node name="GameOver" type="CanvasLayer" parent="."]
 
@@ -87,5 +87,10 @@ offset_bottom = -104.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Nochmal Spielen"
+
+[node name="CheerAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_o156l")
+volume_db = 10.0
+autoplay = true
 
 [connection signal="pressed" from="GameOver/Replay" to="." method="_on_replay_pressed"]

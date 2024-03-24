@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxxeuitbw2hjh"]
+[gd_scene load_steps=3 format=3 uid="uid://dxxeuitbw2hjh"]
 
 [ext_resource type="Script" path="res://helper/scene_switcher.gd" id="1_qc5lv"]
+[ext_resource type="Texture2D" uid="uid://ip6x04vaj5ue" path="res://assets/background.png" id="2_7tc54"]
 
 [node name="SceneSwitcher" type="CanvasLayer"]
 script = ExtResource("1_qc5lv")
@@ -10,8 +11,12 @@ unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 10240.0
-offset_bottom = 6144.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("2_7tc54")
+centered = false

@@ -2,8 +2,9 @@ extends Node2D
 
 @onready var spy_glass = preload("res://assets/spyglass.png")
 @onready var ai_bat_scene = preload("res://character/ai_bat.tscn")
-@onready var player_name: TextEdit = %PlayerName
+@onready var player_name: LineEdit = %PlayerName
 @onready var scene_switcher: SceneSwitcher = %SceneSwitcher
+@onready var player_vars = get_node("/root/PlayerVariables")
 
 var active_bats: int
 var max_bats = 3
@@ -27,5 +28,12 @@ func _on_spawn_timer_timeout():
 	create_bat()
 
 func _on_button_pressed():
+	start()
+
+func _on_player_name_text_submitted(_new_text):
+	start()
+
+func start():
 	if player_name.text != "":
+		player_vars.player_name = player_name.text
 		scene_switcher.transition_to()

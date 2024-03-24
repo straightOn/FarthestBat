@@ -8,10 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://gb7kjb2o7ax7" path="res://character/player.tscn" id="5_malt0"]
 [ext_resource type="PackedScene" uid="uid://dxxeuitbw2hjh" path="res://helper/scene_switcher.tscn" id="8_jhhxm"]
 [ext_resource type="PackedScene" uid="uid://d2r6p1wjgwg6c" path="res://world/ui.tscn" id="8_w1m6l"]
-[ext_resource type="PackedScene" uid="uid://qaxnalmeomkd" path="res://scenes/game_over.tscn" id="9_toxux"]
+[ext_resource type="LabelSettings" uid="uid://dsnteh7tn034" path="res://resources/font.tres" id="10_un46x"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_3kbpe")
+
+[node name="AiSpawner" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
 
 [node name="World" parent="." instance=ExtResource("2_sv8tq")]
 
@@ -29,8 +33,62 @@ unique_name_in_owner = true
 [node name="Ui" parent="." instance=ExtResource("8_w1m6l")]
 unique_name_in_owner = true
 
+[node name="Info" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="General" type="Label" parent="Info"]
+unique_name_in_owner = true
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -530.0
+offset_top = 44.5
+offset_right = -40.0
+offset_bottom = 131.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "das bist du.
+[Leertaste] für EINEN Flügelschlag"
+label_settings = ExtResource("10_un46x")
+
+[node name="Enemy" type="Label" parent="Info"]
+unique_name_in_owner = true
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -530.0
+offset_top = 147.0
+offset_right = -199.0
+offset_bottom = 189.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Es gibt 3 Konkurrenten"
+label_settings = ExtResource("10_un46x")
+
+[node name="Cheat" type="Label" parent="Info"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -530.0
+offset_top = 203.0
+offset_right = -199.0
+offset_bottom = 245.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Ausdauer-Cheat aktiv!"
+label_settings = ExtResource("10_un46x")
+
 [node name="SceneSwitcher" parent="." instance=ExtResource("8_jhhxm")]
 unique_name_in_owner = true
-next_scene_path = ExtResource("9_toxux")
+next_scene_path = "res://scenes/game_over.tscn"
 
+[connection signal="timeout" from="AiSpawner" to="." method="_on_ai_spawner_timeout"]
 [connection signal="player_caught" from="Player" to="." method="_on_player_player_caught"]

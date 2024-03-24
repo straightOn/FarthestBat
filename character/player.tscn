@@ -21,6 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_oe04a"]
 resource_name = "zoom_in"
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -28,7 +29,7 @@ tracks/0/path = NodePath("Player/Bat/Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(2, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(2, 2)]
@@ -48,7 +49,7 @@ character = NodePath("../Bat")
 
 [node name="Bat" parent="." instance=ExtResource("1_2ctbh")]
 unique_name_in_owner = true
-position = Vector2(698, 582)
+position = Vector2(640, 580)
 
 [node name="Camera2D" type="Camera2D" parent="Bat"]
 unique_name_in_owner = true

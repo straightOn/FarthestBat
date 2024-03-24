@@ -1,6 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://ckks5sxlrrs0p"]
+[gd_scene load_steps=18 format=3 uid="uid://ckks5sxlrrs0p"]
 
 [ext_resource type="Script" path="res://character/bat.gd" id="1_ci34c"]
+[ext_resource type="AudioStream" uid="uid://beumdfb410dgg" path="res://assets/flap.mp3" id="2_u3q8y"]
+[ext_resource type="AudioStream" uid="uid://70i6fv1cp8ci" path="res://assets/collect.mp3" id="3_a2lcu"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dkodp"]
 spread = 150.0
@@ -430,6 +432,19 @@ offset_bottom = -32.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_6dy7r")
 value = 100.0
 show_percentage = false
+
+[node name="FlapAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_u3q8y")
+volume_db = 15.0
+max_distance = 1280.0
+
+[node name="SnackAudio" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_a2lcu")
+volume_db = -5.0
+pitch_scale = 2.0
+max_distance = 1280.0
 
 [connection signal="body_entered" from="EatArea" to="." method="_on_eat_area_body_entered"]
 [connection signal="mouse_entered" from="EatArea" to="." method="_on_eat_area_mouse_entered"]
