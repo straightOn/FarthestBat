@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bon7cove46jc4"]
+[gd_scene load_steps=8 format=3 uid="uid://bon7cove46jc4"]
 
 [ext_resource type="Shader" path="res://shader/spy_glass_overlay.gdshader" id="1_i3n77"]
+[ext_resource type="Script" path="res://world/spy_glass_overlay.gd" id="1_ihoms"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_730n4"]
 shader = ExtResource("1_i3n77")
 shader_parameter/player_position = Vector2(0.5, 0.5)
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/MULTIPLIER = 1.5
-shader_parameter/SCALE = 4.0
+shader_parameter/SCALE = 3.0
 shader_parameter/SOFTNESS = 0.22
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7us5y"]
@@ -15,10 +16,72 @@ shader = ExtResource("1_i3n77")
 shader_parameter/player_position = Vector2(0.5, 0.5)
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/MULTIPLIER = 1.5
-shader_parameter/SCALE = 4.0
+shader_parameter/SCALE = 3.0
 shader_parameter/SOFTNESS = 0.22
 
+[sub_resource type="Animation" id="Animation_lrvja"]
+resource_name = "zoom"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left:material:shader_parameter/SCALE")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.0, 4.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right:material:shader_parameter/SCALE")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.0, 4.0]
+}
+
+[sub_resource type="Animation" id="Animation_ebhfn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left:material:shader_parameter/SCALE")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right:material:shader_parameter/SCALE")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_351hq"]
+_data = {
+"RESET": SubResource("Animation_ebhfn"),
+"zoom": SubResource("Animation_lrvja")
+}
+
 [node name="SpyGlassOverlay" type="CanvasLayer"]
+script = ExtResource("1_ihoms")
 
 [node name="Left" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_730n4")
@@ -37,3 +100,9 @@ offset_left = -640.0
 offset_bottom = 768.0
 grow_horizontal = 0
 color = Color(0, 0, 0, 1)
+
+[node name="SpyglassAnimation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_351hq")
+}

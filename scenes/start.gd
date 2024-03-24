@@ -1,6 +1,5 @@
 extends Node2D
 
-@onready var spy_glass = preload("res://assets/spyglass.png")
 @onready var ai_bat_scene = preload("res://character/ai_bat.tscn")
 @onready var player_name: LineEdit = %PlayerName
 @onready var scene_switcher: SceneSwitcher = %SceneSwitcher

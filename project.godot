@@ -13,8 +13,8 @@ config_version=5
 config/name="FarthestBat"
 run/main_scene="res://scenes/start.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-boot_splash/image="res://assets/background.png"
-config/icon="res://assets/icon.png"
+boot_splash/image="res://assets/art/background.png"
+config/icon="res://assets/art/icon.png"
 
 [autoload]
 

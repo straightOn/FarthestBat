@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/game_over.gd" id="1_fwl5q"]
 [ext_resource type="PackedScene" uid="uid://dpfykxenl6jar" path="res://world/fire_fly_container.tscn" id="2_rdxsa"]
 [ext_resource type="PackedScene" uid="uid://dxxeuitbw2hjh" path="res://helper/scene_switcher.tscn" id="3_03j37"]
-[ext_resource type="AudioStream" uid="uid://ci85yy7o1bjyd" path="res://assets/cheer.mp3" id="5_o156l"]
+[ext_resource type="AudioStream" uid="uid://ci85yy7o1bjyd" path="res://assets/audio/cheer.mp3" id="5_o156l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_k18jl"]
 font_size = 80

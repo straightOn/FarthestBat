@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://bg5uxie7ahylk"]
 
 [ext_resource type="Script" path="res://character/ground_predator.gd" id="1_g4ws5"]
-[ext_resource type="AudioStream" uid="uid://y71p5dhqpvvc" path="res://assets/snarl.mp3" id="2_ecqns"]
-[ext_resource type="AudioStream" uid="uid://bpdghl5v3dp5" path="res://assets/catched2.mp3" id="3_gm81a"]
+[ext_resource type="AudioStream" uid="uid://y71p5dhqpvvc" path="res://assets/audio/snarl.mp3" id="2_ecqns"]
+[ext_resource type="AudioStream" uid="uid://bpdghl5v3dp5" path="res://assets/audio/catched2.mp3" id="3_gm81a"]
 
 [sub_resource type="Curve" id="Curve_8cjsc"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

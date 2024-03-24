@@ -5,11 +5,6 @@ class_name SceneSwitcher extends CanvasLayer
 @onready var background = %Background
 @onready var sprite_2d = %Sprite2D
 
-func _process(delta):
-	if visible:
-		pass
-	pass
-
 func _ready() -> void:
 	if use_sprite:
 		sprite_2d.show()

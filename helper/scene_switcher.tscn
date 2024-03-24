@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxxeuitbw2hjh"]
 
 [ext_resource type="Script" path="res://helper/scene_switcher.gd" id="1_qc5lv"]
-[ext_resource type="Texture2D" uid="uid://ip6x04vaj5ue" path="res://assets/background.png" id="2_7tc54"]
+[ext_resource type="Texture2D" uid="uid://ip6x04vaj5ue" path="res://assets/art/background.png" id="2_7tc54"]
 
 [node name="SceneSwitcher" type="CanvasLayer"]
 script = ExtResource("1_qc5lv")

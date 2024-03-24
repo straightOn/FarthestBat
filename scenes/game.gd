@@ -16,6 +16,7 @@ enum GAME_STATE {
 @onready var info_box = %Info
 @onready var cheat = %Cheat
 @onready var general = %General
+@onready var spy_glass_overlay = %SpyGlassOverlay
 
 
 var score = 0
@@ -35,6 +36,7 @@ func _ready():
 		player.enable_endless_stamina()
 	player.player_scored.connect(on_player_scored)
 	player.zoom()
+	spy_glass_overlay.zoom()
 
 func on_player_scored(amount: int):
 	ui.update_score(amount)

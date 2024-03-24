@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=3 uid="uid://ckks5sxlrrs0p"]
 
 [ext_resource type="Script" path="res://character/bat.gd" id="1_ci34c"]
-[ext_resource type="AudioStream" uid="uid://beumdfb410dgg" path="res://assets/flap.mp3" id="2_u3q8y"]
-[ext_resource type="AudioStream" uid="uid://70i6fv1cp8ci" path="res://assets/collect.mp3" id="3_a2lcu"]
+[ext_resource type="AudioStream" uid="uid://beumdfb410dgg" path="res://assets/audio/flap.mp3" id="2_u3q8y"]
+[ext_resource type="AudioStream" uid="uid://70i6fv1cp8ci" path="res://assets/audio/collect.mp3" id="3_a2lcu"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dkodp"]
 spread = 150.0
