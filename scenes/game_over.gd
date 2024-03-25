@@ -4,3 +4,7 @@ extends Node2D
 
 func _on_replay_pressed():
 	scene_switcher.transition_to()
+
+
+func _on_replay_2_pressed():
+	scene_switcher.transition_to("res://scenes/start.tscn")

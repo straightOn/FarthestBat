@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c8xu6pj73b3jv"]
+[gd_scene load_steps=11 format=3 uid="uid://c8xu6pj73b3jv"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_3kbpe"]
 [ext_resource type="PackedScene" uid="uid://bwjwjc317hhkf" path="res://world/world.tscn" id="2_sv8tq"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://gb7kjb2o7ax7" path="res://character/player.tscn" id="5_malt0"]
 [ext_resource type="PackedScene" uid="uid://dxxeuitbw2hjh" path="res://helper/scene_switcher.tscn" id="8_jhhxm"]
 [ext_resource type="PackedScene" uid="uid://d2r6p1wjgwg6c" path="res://world/ui.tscn" id="8_w1m6l"]
+[ext_resource type="PackedScene" uid="uid://bthhqt2pd7e6k" path="res://helper/mobile_controls.tscn" id="9_b15gf"]
 [ext_resource type="LabelSettings" uid="uid://dsnteh7tn034" path="res://resources/font.tres" id="10_un46x"]
 
 [node name="Game" type="Node2D"]
@@ -85,6 +86,8 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "Ausdauer-Cheat aktiv!"
 label_settings = ExtResource("10_un46x")
+
+[node name="MobileControls" parent="." instance=ExtResource("9_b15gf")]
 
 [node name="SceneSwitcher" parent="." instance=ExtResource("8_jhhxm")]
 unique_name_in_owner = true

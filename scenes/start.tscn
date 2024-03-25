@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://kds08jouk45x"]
+[gd_scene load_steps=8 format=3 uid="uid://kds08jouk45x"]
 
 [ext_resource type="PackedScene" uid="uid://bwjwjc317hhkf" path="res://world/world.tscn" id="1_5r0cm"]
 [ext_resource type="Script" path="res://scenes/start.gd" id="1_hnvaa"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bg5uxie7ahylk" path="res://character/ground_predator.tscn" id="3_f0r7d"]
 [ext_resource type="PackedScene" uid="uid://dxxeuitbw2hjh" path="res://helper/scene_switcher.tscn" id="5_4limy"]
 [ext_resource type="LabelSettings" uid="uid://dsnteh7tn034" path="res://resources/font.tres" id="7_077ko"]
+[ext_resource type="Texture2D" uid="uid://bs2ka5djwvmgx" path="res://assets/art/jam_icon.png" id="7_kvyjn"]
 
 [node name="Start" type="Node2D"]
 script = ExtResource("1_hnvaa")
@@ -31,9 +32,9 @@ use_sprite = true
 
 [node name="Title" type="Label" parent="Menu"]
 offset_left = 305.0
-offset_top = 323.0
+offset_top = 203.0
 offset_right = 974.0
-offset_bottom = 433.0
+offset_bottom = 313.0
 text = "Luminous Leaper"
 label_settings = ExtResource("7_077ko")
 horizontal_alignment = 1
@@ -47,9 +48,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -166.0
-offset_top = 60.0
+offset_top = -60.0
 offset_right = 134.0
-offset_bottom = 100.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 placeholder_text = "Name"
@@ -62,12 +63,41 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 134.5
-offset_top = 59.5
+offset_top = -60.5
 offset_right = 174.5
-offset_bottom = 99.5
+offset_bottom = -20.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Los"
+
+[node name="Highscores" type="TextEdit" parent="Menu"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.0
+offset_top = -4.0
+offset_right = 174.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Noch keine Highscores vorhanden."
+editable = false
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+
+[node name="JamIcon" type="Sprite2D" parent="Menu"]
+modulate = Color(1, 1, 1, 0.662745)
+position = Vector2(639, 160)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_kvyjn")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="text_submitted" from="Menu/PlayerName" to="." method="_on_player_name_text_submitted"]

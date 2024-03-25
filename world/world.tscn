@@ -53,3 +53,8 @@ shape = SubResource("WorldBoundaryShape2D_lsdmn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wrhyu")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+position = Vector2(696, 613)
+energy = 0.3

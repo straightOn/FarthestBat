@@ -88,9 +88,24 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Nochmal Spielen"
 
+[node name="Replay2" type="Button" parent="GameOver"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -73.5
+offset_top = -93.0
+offset_right = 73.5
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Zum Start"
+
 [node name="CheerAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_o156l")
 volume_db = 10.0
 autoplay = true
 
 [connection signal="pressed" from="GameOver/Replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="GameOver/Replay2" to="." method="_on_replay_2_pressed"]

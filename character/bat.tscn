@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ckks5sxlrrs0p"]
+[gd_scene load_steps=20 format=3 uid="uid://ckks5sxlrrs0p"]
 
 [ext_resource type="Script" path="res://character/bat.gd" id="1_ci34c"]
 [ext_resource type="AudioStream" uid="uid://beumdfb410dgg" path="res://assets/audio/flap.mp3" id="2_u3q8y"]
@@ -37,6 +37,12 @@ turbulence_noise_speed = Vector3(1, 0, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_28nlh"]
 height = 32.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_eia86"]
+polygon = PackedVector2Array(-25, -10, 0, 16, 25, -10)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jdyge"]
+polygon = PackedVector2Array(-8, -13, 0, -6, 8, -13, 0, -17)
 
 [sub_resource type="Animation" id="Animation_3nukd"]
 length = 0.001
@@ -378,6 +384,9 @@ polygon = PackedVector2Array(0, 11, -7, 16, 7, 16)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 16, 25, -10, -25, -10)
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Body"]
+occluder = SubResource("OccluderPolygon2D_eia86")
+
 [node name="Ears" type="Polygon2D" parent="."]
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-8, -12, -9, -20, 0, -14, 9, -20, 8, -12)
@@ -386,6 +395,9 @@ polygon = PackedVector2Array(-8, -12, -9, -20, 0, -14, 9, -20, 8, -12)
 position = Vector2(0, 1)
 color = Color(0.0862745, 0.0862745, 0.0862745, 1)
 polygon = PackedVector2Array(0, -6, -8, -13, 0, -17, 8, -13)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Head"]
+occluder = SubResource("OccluderPolygon2D_jdyge")
 
 [node name="Eyes" type="Polygon2D" parent="."]
 skew = 0.0349066

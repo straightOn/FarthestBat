@@ -7,7 +7,7 @@ signal player_caught
 signal player_scored(amount: int)
 
 func _ready():
-	bat.will_be_destroyed.connect(caught)
+	bat.on_caught.connect(caught)
 	bat.add_score.connect(score_added)
 	bat.disable_gravity()
 

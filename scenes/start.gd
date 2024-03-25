@@ -4,11 +4,13 @@ extends Node2D
 @onready var player_name: LineEdit = %PlayerName
 @onready var scene_switcher: SceneSwitcher = %SceneSwitcher
 @onready var player_vars = get_node("/root/PlayerVariables")
+@onready var highscores_textbox = %Highscores
 
 var active_bats: int
 var max_bats = 3
 
 func _ready():
+	highscores_textbox.text = player_vars.get_highscores(5)
 	create_bat()
 
 func create_bat():
@@ -17,7 +19,7 @@ func create_bat():
 	var new_bat = ai_bat_scene.instantiate()
 	add_child(new_bat)
 	new_bat.global_position = Vector2(698, 600)
-	new_bat.will_be_destroyed.connect(bat_caught)
+	new_bat.caught.connect(bat_caught)
 	active_bats += 1
 
 func bat_caught():

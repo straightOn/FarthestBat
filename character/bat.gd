@@ -26,7 +26,6 @@ var active = true
 var endless_stamina = false
 
 signal on_caught
-signal will_be_destroyed
 signal position_updated(new_position: Vector2)
 signal add_score(amount: int)
 
@@ -67,6 +66,8 @@ func flap():
 		animation_player.play("flap")
 
 func _physics_process(delta):
+	if !active:
+		return
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	if velocity.y < 0:
@@ -113,9 +114,7 @@ func _on_eat_area_body_entered(body):
 func caught():
 	# splatter-particle here
 	active = false
+	velocity = Vector2.ZERO
 	caught_particles.emitting = true
+	await caught_particles.finished
 	on_caught.emit()
-	caught_particles.finished.connect(destroy)
-
-func destroy():
-	will_be_destroyed.emit()

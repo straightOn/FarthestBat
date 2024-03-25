@@ -47,6 +47,8 @@ func _input(event):
 
 func _on_player_player_caught():
 	set_state(GAME_STATE.FINISHED)
+	player_vars.add_highscore(ui.score)
+	player_vars.save_highscores()
 	ai_spawner.stop()
 	ui.game_over()
 	await ui.finished_animation_done
@@ -77,7 +79,7 @@ func create_ai_bat():
 	var new_bat = ai_bat_scene.instantiate()
 	add_child(new_bat)
 	new_bat.global_position = Vector2(698, 600)
-	new_bat.will_be_destroyed.connect(bat_caught)
+	new_bat.caught.connect(bat_caught)
 	active_bats += 1
 
 func bat_caught():
